@@ -73,8 +73,7 @@ func NewEmailNotificationFormatter(to string, from string) *EmailNotificationFor
 			<td>{{ .State -}}</td>
 			<td>{{ .CreatedOn -}}</td>
 		</tr>
-{{ end -}}
-	</tbody>
+{{ end }}	</tbody>
 </table>
 
 <h3>Closed Pull Requests</h1>
@@ -92,8 +91,7 @@ func NewEmailNotificationFormatter(to string, from string) *EmailNotificationFor
 			<td>{{ .State -}}</td>
 			<td>{{ .CreatedOn -}}</td>
 		</tr>
-{{ end -}}
-	</tbody>
+{{ end }}	</tbody>
 </table>
 
 `

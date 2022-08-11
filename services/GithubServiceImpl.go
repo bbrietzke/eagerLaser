@@ -14,7 +14,7 @@ type GithubPRService struct {
 func (p *GithubPRService) GetPullRequests() ([]PullRequest, error) {
 	ctx := context.TODO()
 	var retVal []PullRequest
-	age := time.Now().Add(-336 * time.Hour)
+	age := time.Now().Add(-360 * time.Hour)
 
 	client := github.NewClient(nil)
 	options := &github.PullRequestListOptions{State: "all", Sort: "created", Direction: "desc"}

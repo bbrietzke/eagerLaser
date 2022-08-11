@@ -53,11 +53,10 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.eagerLaser.yaml)")
 
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	rootCmd.Flags().StringVar(&githubProject, "project", "google/go-github", "The Github Project to query")
-	rootCmd.Flags().StringVar(&sender, "sender", "noone@example.org", "Who is sending the email")
-	rootCmd.Flags().StringVar(&destination, "to", "mygroup@example.org", "Who are we sending the message to?")
-	rootCmd.Flags().BoolVar(&console, "console", false, "Display list to console")
+	rootCmd.PersistentFlags().StringVar(&githubProject, "project", "google/go-github", "The Github Project to query")
+	rootCmd.PersistentFlags().StringVar(&sender, "sender", "noone@example.org", "Who is sending the email")
+	rootCmd.PersistentFlags().StringVar(&destination, "destination", "mygroup@example.org", "Who are we sending the message to?")
+	rootCmd.PersistentFlags().BoolVar(&console, "console", false, "Display list to console")
 
 }
 
@@ -73,6 +72,7 @@ func initConfig() {
 
 		// Search config in home directory with name ".eagerLaser" (without extension).
 		viper.AddConfigPath(home)
+		viper.AddConfigPath(".")
 		viper.SetConfigType("yaml")
 		viper.SetConfigName(".eagerLaser")
 	}
