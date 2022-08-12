@@ -10,6 +10,7 @@ type notification struct {
 	ClosedPrs   []PullRequest
 	Destination string
 	Sender      string
+	Subject     string
 }
 
 type EmailNotificationFormatter struct {
@@ -42,6 +43,7 @@ func (s *EmailNotificationFormatter) Notify(pullRequests []PullRequest) error {
 		Sender:      s.sender,
 		OpenPrs:     open,
 		ClosedPrs:   closed,
+		Subject:     "Pull Requests Log",
 	}
 
 	err = t1.Execute(os.Stdout, data)
@@ -55,8 +57,9 @@ func (s *EmailNotificationFormatter) Notify(pullRequests []PullRequest) error {
 
 func NewEmailNotificationFormatter(to string, from string) *EmailNotificationFormatter {
 	t := `
-<h1>To {{.Destination}}</h1>
-<h1>From {{.Sender}}</h1>
+<h1>[To] {{.Destination}}</h1>
+<h1>[From] {{.Sender}}</h1>
+<h1>[Subject] {{.Subject}}</h1>
 
 <h3>Open Pull Requests</h1>
 <table>

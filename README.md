@@ -23,4 +23,11 @@ do not choose this option, you will get the fancy HTML output.
 ```--destination <emailAddress>``` will send the email to that group/person.
 ```--project <owner/project>``` will pull the PRs from that repository.
 
-The config file option doesn't work right now, though I want to get it fixed.
+
+### Config File
+```yaml
+---
+project: spf13/viper
+sender: brad@example.com
+destination: developers@example.com
+```

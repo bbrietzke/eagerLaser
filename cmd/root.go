@@ -22,7 +22,7 @@ var rootCmd = &cobra.Command{
 	Short: "View Github Pull Requests",
 	Long:  `View Github Pull Requests.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		v := strings.Split(githubProject, "/")
+		v := strings.Split(viper.GetString("project"), "/")
 
 		g := services.GithubPullRequests(v[0], v[1])
 		prs, err := g.GetPullRequests()
@@ -32,7 +32,7 @@ var rootCmd = &cobra.Command{
 				notifier := services.NewConsoleNotifier()
 				notifier.Notify(prs)
 			} else {
-				notifier := services.NewEmailNotificationFormatter(destination, sender)
+				notifier := services.NewEmailNotificationFormatter(viper.GetString("destination"), viper.GetString("sender"))
 				notifier.Notify(prs)
 			}
 		} else {
@@ -54,10 +54,13 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.eagerLaser.yaml)")
 
 	rootCmd.PersistentFlags().StringVar(&githubProject, "project", "google/go-github", "The Github Project to query")
-	rootCmd.PersistentFlags().StringVar(&sender, "sender", "noone@example.org", "Who is sending the email")
+	rootCmd.PersistentFlags().StringVar(&sender, "sender", "s", "Who is sending the email")
 	rootCmd.PersistentFlags().StringVar(&destination, "destination", "mygroup@example.org", "Who are we sending the message to?")
 	rootCmd.PersistentFlags().BoolVar(&console, "console", false, "Display list to console")
 
+	viper.BindPFlag("project", rootCmd.PersistentFlags().Lookup("project"))
+	viper.BindPFlag("sender", rootCmd.PersistentFlags().Lookup("sender"))
+	viper.BindPFlag("destination", rootCmd.PersistentFlags().Lookup("destination"))
 }
 
 // initConfig reads in config file and ENV variables if set.
