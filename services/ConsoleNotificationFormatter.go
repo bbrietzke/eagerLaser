@@ -36,7 +36,7 @@ func NewConsoleNotifier() *ConsoleNotificationService {
 Title						State      Url
 -------------------------------------------------------------------------
 {{range . -}}
-{{.Title 	| columnTitle }} {{.State | columnState}}{{.Url }}
+{{.Title | columnTitle }}{{.State | columnState}}{{.Url }}
 {{end -}}
 `
 	return &ConsoleNotificationService{template: t}
