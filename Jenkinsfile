@@ -7,6 +7,11 @@ pipeline {
                 sh 'go version'
             }
         }
+        stage('envCheck') {
+            steps {
+                sh 'env | sort'
+            }
+        }
         stage('build ') {
             steps {
                 sh 'GOOS=linux GOARCH=amd64 go build -o bin/linux/amd64/eagerLaser .'
