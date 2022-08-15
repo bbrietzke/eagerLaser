@@ -15,9 +15,9 @@ pipeline {
         stage('build ') {
             steps {
                 sh 'TMPDIR=${WORKSPACE_TMP} GOOS=linux GOARCH=amd64 go build -o bin/linux/amd64/eagerLaser .'
-                sh 'GOOS=linux GOARCH=arm64 go build -o bin/linux/arm64/eagerLaser .'
-                sh 'GOOS=darwin GOARCH=arm64 go build -o bin/darwin/arm64/eagerLaser .'
-                sh 'GOOS=darwin GOARCH=amd64 go build -o bin/darwin/amd64/eagerLaser .'
+                sh 'TMPDIR=${WORKSPACE_TMP} GOOS=linux GOARCH=arm64 go build -o bin/linux/arm64/eagerLaser .'
+                sh 'TMPDIR=${WORKSPACE_TMP} GOOS=darwin GOARCH=arm64 go build -o bin/darwin/arm64/eagerLaser .'
+                sh 'TMPDIR=${WORKSPACE_TMP} GOOS=darwin GOARCH=amd64 go build -o bin/darwin/amd64/eagerLaser .'
             }
         }
     }
