@@ -1,5 +1,6 @@
 pipeline {
-    agent { kubernetes { image 'golang:1.17.5-alpine' } }
+    agent { any }
+    tools { go 'go1.19' }
     stages {
         stage('build') {
             steps {
